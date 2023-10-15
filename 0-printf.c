@@ -26,9 +26,10 @@ int _printf(const char *format, ...)
 	char result[150] = "";
 	char specifier[3] = "";
 	va_list arg;
+	size_t i = 0;
 
 	va_start(arg, format);
-	for (int i = 0; i < strlen(format); i++)
+	while (i < strlen(format))
 	{
 		if (format[i] == '%' && specifier[0] != '%')
 			specifier[0] = '%';
@@ -57,6 +58,7 @@ int _printf(const char *format, ...)
 		}
 		if (format[i] != '%')
 			chtoStrcat(result, format[i]);
+		i++;
 	}
 	va_end(arg);
 	write(1, result, strlen(result));
