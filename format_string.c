@@ -41,9 +41,9 @@ void concat(char result[], char ch, char specifier[])
  * @arg: the variadic arguments
  * @format: the string that needs to be formated
  * @spec: the string that holds the specifier
- * @result: the final formated string
+ * @res: the final formated string
  */
-void format_string(va_list arg, const char *format, char spec[], char result[])
+void format_string(va_list arg, const char *format, char spec[], char res[])
 {
 	size_t i = 0;
 
@@ -52,26 +52,35 @@ void format_string(va_list arg, const char *format, char spec[], char result[])
 		check_specifier(spec, format[i]);
 		if (spec[0] == '%' && spec[1] == 'c')
 		{
-			concat(result, va_arg(arg, int), spec);
+			concat(res, va_arg(arg, int), spec);
 			i++;
 			continue;
 		}
 		else if (spec[0] == '%' && spec[1] == 's')
 		{
-			strcat(result, va_arg(arg, char *));
-			spec[0] = ' ';
-			spec[1] = ' ';
+			print_string(res, va_arg(arg, char *), spec);
+			i++;
+			continue;
+		}
+		else if (spec[0] == '%' && spec[1] == 'b')
+		{
+			print_binary(res, va_arg(arg, int), spec);
 			i++;
 			continue;
 		}
 		else if (spec[0] == '%' && spec[1] == '%')
 		{
-			concat(result, '%', spec);
+			concat(res, '%', spec);
 			i++;
 			continue;
 		}
-		if (format[i] != '%')
-			chtoStrcat(result, format[i]);
-		i++;
+		else if (spec[0] == '%')
+		{
+			i++;
+			continue;
 		}
+		if (format[i] != '%' && (spec[0] != '%' || spec[1] != ' '))
+			chtoStrcat(res, format[i]);
+		i++;
+	}
 }
