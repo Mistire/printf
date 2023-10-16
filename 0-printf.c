@@ -7,7 +7,7 @@
  */
 int _printf(const char *format, ...)
 {
-	char result[150] = "";
+	char result[1024] = "";
 	char specifier[3] = "";
 	va_list arg;
 
