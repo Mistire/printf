@@ -9,7 +9,7 @@
 int _printf(const char *format, ...)
 {
 	va_list args;
-	int countt = 0;
+	int tally = 0;
 
 	va_start(args, format);
 
@@ -22,17 +22,17 @@ int _printf(const char *format, ...)
 		{
 			format++;
 
-			handle_format(args, *format, &count);
+			handle_format(args, *format, &tally);
 		}
 		else
 		{
 			write(1, format, 1);
-			countt++;
+			tally++;
 		}
 
 		format++;
 	}
 
 	va_end(args);
-	return (countt);
+	return (tally);
 }
