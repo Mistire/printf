@@ -15,8 +15,7 @@ Motivation: The project aimed to enhance our understanding of string formatting 
 
 **Challenges and Solutions:** The project likely presented challenges related to parsing format strings, handling different data types, and achieving optimal performance. Describe the challenges you encountered and the solutions you implemented.
 
-**Usage:** Provide examples and use cases for your custom printf function within the specific programming language or environment for which it was developed.
-
-**Testing and Validation:** Describe how the project was tested to ensure correctness and reliability. Discuss any unit tests, integration tests, or validation processes used.
-
 **Summary:** The "printf" project was an educational journey that allowed us to delve deep into the world of string formatting and output control. By creating a custom printf implementation, we gained a deeper understanding of the inner workings of this fundamental function, along with the flexibility to tailor it to our specific needs. This project also honed our skills in software development and problem-solving, paving the way for future programming challenges.
+
+
+### Authors: Kidsus Asebe And Mistire Daniel
