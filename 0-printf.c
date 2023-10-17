@@ -1,19 +1,19 @@
 #include "main.h"
 
 /**
- * _printf - Custom implementation of the printf function
- * @format: A constant pointer to the format string
- * Return: The count of characters printed
+ * _printf - Custom printf-like function
+ * @format: A constant character pointer representing the format string
+ * Return: The number of characters printed
  */
 int _printf(const char *format, ...)
 {
-	int (*print_func)(va_list, flags_t *);
-	const char *format_ptr;
-	va_list args;
+	int (*print_function)(va_list, flags_t *);
+	const char *format_iterator;
+	va_list arguments;
 	flags_t flags = {0, 0, 0};
-	int char_count = 0;
+	int character_count = 0;
 
-	va_start(args, format);
+	va_start(arguments, format);
 
 	if (!format || (format[0] == '%' && !format[1]))
 		return (-1);
@@ -21,34 +21,34 @@ int _printf(const char *format, ...)
 	if (format[0] == '%' && format[1] == ' ' && !format[2])
 		return (-1);
 
-	for (format_ptr = format; *format_ptr; format_ptr++)
+	for (format_iterator = format; *format_iterator; format_iterator++)
 	{
-		if (*format_ptr == '%')
+		if (*format_iterator == '%')
 		{
-			format_ptr++;
+			format_iterator++;
 
-			if (*format_ptr == '%')
+			if (*format_iterator == '%')
 			{
-				char_count += _putchar('%');
+				character_count += _putchar('%');
 				continue;
 			}
 
-			while (get_flag(*format_ptr, &flags))
-				format_ptr++;
+			while (get_flag(*format_iterator, &flags))
+				format_iterator++;
 
-			print_func = get_print(*format_ptr);
-			char_count += (print_func)
-			? print_func(args, &flags)
-			: _printf("%%%c", *format_ptr);
+			print_function = get_print(*format_iterator);
+			character_count += (print_function)
+				? print_function(arguments, &flags)
+				: _printf("%%%c", *format_iterator);
 		}
 		else
 		{
-			char_count += _putchar(*format_ptr);
+			character_count += _putchar(*format_iterator);
 		}
 	}
 
-	_putchar(-1);
-	va_end(args);
-	return char_count;
+    	_putchar(-1);
+    	va_end(arguments);
+    	return character_count;
 }
 
